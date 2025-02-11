@@ -13,7 +13,7 @@ void main() async {
   await setupLocator();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: AppColors.whiteBackground, // Set your desired color
+      statusBarColor: AppColors.whiteBackground,
     ),
   );
   runApp(const MyApp());
@@ -21,8 +21,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -43,7 +41,6 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           routerConfig: router,
-          //home: userId == null ? const LoginScreen() : const CheckInOut(),
         );
       },
     );
