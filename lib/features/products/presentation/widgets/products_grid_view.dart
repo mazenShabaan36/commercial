@@ -1,9 +1,6 @@
-import 'package:commercial/core/routers/routers.dart';
-import 'package:commercial/core/widgets/custom_fading_widget.dart';
 import 'package:commercial/features/products/data/models/products/products.dart';
 import 'package:commercial/features/products/presentation/bloc/bloc/products_bloc.dart';
 import 'package:commercial/features/products/presentation/widgets/product_card.dart';
-import 'package:commercial/features/products/presentation/widgets/product_card_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

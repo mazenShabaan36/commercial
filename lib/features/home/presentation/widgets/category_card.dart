@@ -4,6 +4,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/size.dart';
 import '../../../../core/utils/text.dart';
 
+// ignore: must_be_immutable
 class CategoryCard extends StatelessWidget {
   CategoryCard(
       {super.key,
