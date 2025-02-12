@@ -9,7 +9,6 @@ class ApiService {
 
   ApiService() {
     _dio.options.baseUrl = ApiConstants.baseUrl;
-    _dio.options.connectTimeout = const Duration(seconds: 5);
     _dio.interceptors.add(LogInterceptor(responseBody: true));
     _dio.interceptors.add(InterceptorsWrapper(
       onError: (DioException e, handler) async {

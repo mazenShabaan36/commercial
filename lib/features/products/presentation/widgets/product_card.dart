@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:commercial/features/products/data/models/products/products.dart';
+import 'package:commercial/features/products/presentation/widgets/product_card_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -38,8 +39,7 @@ class ProductCard extends StatelessWidget {
                         imageUrl: products.image.toString(),
                         progressIndicatorBuilder:
                             (context, url, downloadProgress) =>
-                                CircularProgressIndicator(
-                                    value: downloadProgress.progress),
+                               const  ProductCardLoading(),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                         height: height(context) * 0.25,
