@@ -8,5 +8,8 @@ class AppAssets {
   static const String home = 'assets/images/home.svg';
   static const String arrowBackIcon = 'assets/icons/arrow_back_icon.svg';
   static const String manphoto = 'assets/images/man.png';
-  static const String swipIcon='assets/icons/swipe_icon.svg';
+  static const String swipIcon = 'assets/icons/swipe_icon.svg';
+  static const String plusIcon = 'assets/icons/adding_icon.svg';
+  static const String minusingICon = 'assets/icons/minusing_icon.svg';
+  static const String delete = 'assets/icons/trashing.svg';
 }

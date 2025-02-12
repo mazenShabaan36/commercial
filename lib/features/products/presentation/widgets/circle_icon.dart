@@ -19,7 +19,7 @@ class CircleIcon extends StatelessWidget {
       child: SvgPicture.asset(
         iconurl,
         color: AppColors.mainColor,
-        height: height(context)*0.025,
+        height: height(context) * 0.025,
       ),
     );
   }

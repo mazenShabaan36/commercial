@@ -33,6 +33,7 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               text,

@@ -13,4 +13,5 @@ class AppColors {
   static const Color colorWhite = Color(0xFFFAFBFC);
   static const Color colorWhiteLight = Color(0xFFFFFFFF);
   static const Color colorBlack = Color(0xFF000000);
+  static const Color dashedColorLine = Color(0xFFE2E2E2);
 }

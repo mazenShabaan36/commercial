@@ -1,4 +1,5 @@
 import 'package:commercial/core/routers/app_routes.dart';
+import 'package:commercial/features/cart/presentation/pages/cart_screen.dart';
 import 'package:commercial/features/home/presentation/pages/home_page.dart';
 import 'package:commercial/features/products/data/models/products/products.dart';
 import 'package:commercial/features/products/presentation/pages/product_detail_screen.dart';
@@ -16,10 +17,14 @@ final GoRouter router = GoRouter(
       path: AppRoutes.productDetails,
       builder: (context, state) {
         final Products product = state.extra as Products;
-        return  ProductDetailScreen(
+        return ProductDetailScreen(
           products: product,
         );
       },
+    ),
+    GoRoute(
+      path: AppRoutes.cart,
+      builder: (context, state) => const CartScreen(),
     ),
   ],
   errorBuilder: (context, state) {

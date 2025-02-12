@@ -21,6 +21,7 @@ class Products {
   String? image;
   @HiveField(6)
   Rating? rating;
+  int quantity;
 
   Products({
     this.id,
@@ -30,6 +31,7 @@ class Products {
     this.category,
     this.image,
     this.rating,
+    this.quantity = 1,
   });
 
   factory Products.fromJsonData(Map<String, dynamic> data) {
@@ -54,8 +56,7 @@ class Products {
       'description': description,
       'category': category,
       'image': image,
-      'rating': rating
-          ?.toJsonData(),
+      'rating': rating?.toJsonData(),
     };
   }
 

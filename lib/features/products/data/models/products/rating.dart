@@ -6,16 +6,14 @@ class Rating {
 
   Rating({this.rate, this.count});
 
-  factory Rating.fromJsonData(
-      Map<String, dynamic> data) {
+  factory Rating.fromJsonData(Map<String, dynamic> data) {
     return Rating(
       rate: (data['rate'] as num?)?.toDouble(),
       count: data['count'] as int?,
     );
   }
 
-  Map<String, dynamic>
-      toJsonData() {
+  Map<String, dynamic> toJsonData() {
     return {
       'rate': rate,
       'count': count,
@@ -26,14 +24,11 @@ class Rating {
   ///
   /// Parses the string and returns the resulting Json object as [Rating].
   factory Rating.fromJson(String data) {
-    return Rating
-        .fromJsonData(
-            json.decode(data) as Map<String, dynamic>);
+    return Rating.fromJsonData(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
   /// Converts [Rating] to a JSON string.
-  String toJson() => json.encode(
-      toJsonData());
+  String toJson() => json.encode(toJsonData());
 }

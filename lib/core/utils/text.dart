@@ -14,6 +14,14 @@ abstract class Styles {
       fontSize: AppFonts.t12,
       fontWeight: FontWeight.w400,
       color: AppColors.colorGreyText);
+  static final TextStyle style14greyM = GoogleFonts.poppins(
+      fontSize: AppFonts.t14,
+      fontWeight: FontWeight.w400,
+      color: AppColors.colorGreyText);
+  static final TextStyle style14greyL = GoogleFonts.poppins(
+      fontSize: AppFonts.t14,
+      fontWeight: FontWeight.w600,
+      color: AppColors.colorGreyText);
   static final TextStyle style12mainClrL = GoogleFonts.poppins(
       fontSize: AppFonts.t12,
       fontWeight: FontWeight.w600,
@@ -32,6 +40,10 @@ abstract class Styles {
       color: AppColors.mainColor);
   static final TextStyle style14mainClrL = GoogleFonts.poppins(
       fontSize: AppFonts.t14,
+      fontWeight: FontWeight.w600,
+      color: AppColors.mainColor);
+  static final TextStyle style16mainClrL = GoogleFonts.poppins(
+      fontSize: AppFonts.t16,
       fontWeight: FontWeight.w600,
       color: AppColors.mainColor);
   static final TextStyle style20mainClrL = GoogleFonts.poppins(

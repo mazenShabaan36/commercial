@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                   const WelcomingRow(),
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: height(context) * 0.025),
+                        EdgeInsets.symmetric(vertical: height(context) * 0.01),
                     child: CustomSearchFiled(
                         textEditingController: TextEditingController()),
                   ),
