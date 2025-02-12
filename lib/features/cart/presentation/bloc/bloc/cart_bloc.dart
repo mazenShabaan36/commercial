@@ -19,5 +19,33 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         (data) => emit(CartLoaded(cartProducts: data)),
       );
     });
+    on<IncreaseQuantity>((event, emit) {
+      final currentState = state;
+      if (currentState is CartLoaded) {
+        final updatedItems = List<Products>.from(currentState.cartProducts);
+        updatedItems[event.index] = updatedItems[event.index]
+            .copyWith(quantity: updatedItems[event.index].quantity + 1);
+        emit(CartLoaded(cartProducts: updatedItems));
+      }
+    });
+    on<DecreaseQuantity>((event, emit) {
+      final currentState = state;
+      if (currentState is CartLoaded) {
+        final updatedItems = List<Products>.from(currentState.cartProducts);
+        if (updatedItems[event.index].quantity > 1) {
+          updatedItems[event.index] = updatedItems[event.index]
+              .copyWith(quantity: updatedItems[event.index].quantity - 1);
+          emit(CartLoaded(cartProducts: updatedItems));
+        }
+      }
+    });
+    on<RemoveItem>((event, emit) {
+      final currentState = state;
+      if (currentState is CartLoaded) {
+        final updatedItems = List<Products>.from(currentState.cartProducts)
+          ..removeAt(event.index);
+        emit(CartLoaded(cartProducts: updatedItems));
+      }
+    });
   }
 }

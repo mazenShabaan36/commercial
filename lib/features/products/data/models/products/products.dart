@@ -71,4 +71,17 @@ class Products {
   ///
   /// Converts [Products] to a JSON string.
   String toJson() => json.encode(toJsonData());
+
+  Products copyWith({int? quantity}) {
+    return Products(
+      id: id,
+      title: title,
+      image: image,
+      price: price,
+      category: category,
+      description: description,
+      rating: rating,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 }
