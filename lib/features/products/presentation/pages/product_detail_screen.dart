@@ -73,7 +73,7 @@ class ProductDetailScreen extends StatelessWidget {
                 children: [
                   SubtotalColumn(products: products),
                   SizedBox(
-                    width: width(context) * 0.38,
+                    width: width(context) * 0.42,
                     child: CustomButton(
                         text: AppStrings.continueText,
                         onPressed: () {},

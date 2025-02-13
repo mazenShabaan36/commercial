@@ -13,6 +13,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/utils/text.dart';
 import '../bloc/bloc/cart_bloc.dart';
 import '../widgets/checkout_section.dart';
+import '../widgets/loading_cart_list_view.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -44,7 +45,7 @@ class CartScreen extends StatelessWidget {
         child: BlocBuilder<CartBloc, CartState>(
           builder: (context, state) {
             if (state is CartLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const LoadingCartListView();
             } else if (state is CartLoaded) {
               return Column(
                 children: [
