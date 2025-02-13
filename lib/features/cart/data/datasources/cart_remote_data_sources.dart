@@ -7,7 +7,7 @@ import '../../../../core/errors/failures.dart';
 import '../../../../core/remote/api_service.dart';
 
 abstract class CartRemoteDataSources {
-  Future<List<Products>> fetchCartItems();
+  Future<List<dynamic>> fetchCartItems();
 }
 
 class CartRemoteDataSourcesImpl implements CartRemoteDataSources {
@@ -16,7 +16,7 @@ class CartRemoteDataSourcesImpl implements CartRemoteDataSources {
   CartRemoteDataSourcesImpl({required this.apiService});
 
   @override
-  Future<List<Products>> fetchCartItems() async {
+  Future<List<dynamic>> fetchCartItems() async {
     try {
       final response = await apiService.get(ApiConstants.cartItems);
       //final Cart cart = Cart.fromJsonData(response.data);

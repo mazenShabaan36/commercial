@@ -11,7 +11,7 @@ class GetCarts implements UseCase<dynamic, NoParams> {
   GetCarts({required this.cartRepository});
 
   @override
-  Future<Either<Failure, List<Products>>> call(NoParams params) async {
+  Future<Either<Failure, List<dynamic>>> call(NoParams params) async {
     return await cartRepository.fetchCartsItems();
   }
 }

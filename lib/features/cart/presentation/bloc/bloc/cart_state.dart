@@ -8,7 +8,7 @@ final class CartInitial extends CartState {}
 final class CartLoading extends CartState {}
 
 final class CartLoaded extends CartState {
-  final List<Products> cartProducts;
+  final List<dynamic> cartProducts;
   CartLoaded({required this.cartProducts});
   double get subTotal =>
       cartProducts.fold(0, (sum, item) => sum + (item.price! * item.quantity));

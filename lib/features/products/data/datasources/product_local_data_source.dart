@@ -26,7 +26,7 @@ class ProductLocalDataSourceImpl implements ProductsLocalDataSource {
   @override
   Future<dynamic> getCachedProducts() async {
     try {
-      log(box.get('cacheProduct'));
+    //  log(box.get('cacheProduct'));
       return  box.get('cacheProduct');
     } catch (e) {
       throw CacheFailure('Failed to get cached data');
