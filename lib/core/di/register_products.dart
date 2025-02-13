@@ -1,4 +1,5 @@
 import 'package:commercial/core/di/di.dart';
+import 'package:commercial/core/network/network_info.dart';
 import 'package:commercial/features/products/data/datasources/product_local_data_source.dart';
 import 'package:commercial/features/products/data/datasources/product_remote_data_source.dart';
 import 'package:commercial/features/products/domain/repositories/products_repo.dart';
@@ -23,6 +24,7 @@ void registerProducts() {
     () => ProductRepoImpl(
       localDataSource: sl<ProductsLocalDataSource>(),
       remoteDataSource: sl<ProductsRemoteDataSource>(),
+      networkInfo: sl<NetworkInfo>()
     ),
   );
 

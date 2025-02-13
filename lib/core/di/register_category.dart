@@ -1,5 +1,5 @@
-
 import 'package:commercial/core/di/di.dart';
+import 'package:commercial/core/network/network_info.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../features/home/data/datasources/local_data_source.dart';
@@ -10,6 +10,7 @@ import 'package:commercial/features/home/domain/usecases/category_usecase.dart';
 import 'package:commercial/features/home/presentation/bloc/bloc/category_bloc.dart';
 
 import '../remote/api_service.dart';
+
 void registerCategory() {
   sl.registerLazySingleton<RemoteDataSource>(
     () => RemoteDataSourceImpl(
@@ -23,9 +24,9 @@ void registerCategory() {
 
   sl.registerLazySingleton<CategoryRepository>(
     () => CategoryRepoImpl(
-      localDataSource: sl<CategoryLocalDataSource>(),
-      remoteDataSource: sl<RemoteDataSource>(),
-    ),
+        localDataSource: sl<CategoryLocalDataSource>(),
+        remoteDataSource: sl<RemoteDataSource>(),
+        networkInfo: sl<NetworkInfo>()),
   );
 
   sl.registerLazySingleton<GetCategoryData>(() => GetCategoryData(

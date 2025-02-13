@@ -1,7 +1,14 @@
 import 'dart:convert';
 
+import 'package:hive_flutter/hive_flutter.dart';
+
+part 'rating.g.dart';
+
+@HiveType(typeId: 3)
 class Rating {
+  @HiveField(0)
   double? rate;
+  @HiveField(1)
   int? count;
 
   Rating({this.rate, this.count});

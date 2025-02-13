@@ -7,7 +7,7 @@ import '../../../../core/errors/failures.dart';
 import '../../../../core/remote/api_service.dart';
 
 abstract class CartRemoteDataSources {
-  Future<dynamic> fetchCartItems();
+  Future<List<Products>> fetchCartItems();
 }
 
 class CartRemoteDataSourcesImpl implements CartRemoteDataSources {

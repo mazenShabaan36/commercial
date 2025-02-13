@@ -1,3 +1,4 @@
+import 'package:commercial/core/network/network_info.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../features/cart/data/datasources/cart_local_data_sources.dart';
@@ -23,6 +24,7 @@ void registerCart() {
     () => CartRepositoriesImpl(
       cartLocalDataSource: sl<CartLocalDataSources>(),
       cartRemoteDataSources: sl<CartRemoteDataSources>(),
+      networkInfo: sl<NetworkInfo>()
     ),
   );
 

@@ -1,3 +1,4 @@
+import 'package:commercial/features/products/data/models/products/rating.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../features/cart/data/models/cart/cart.dart';
@@ -11,10 +12,11 @@ class HiveSetup {
 
     // Register adapters here
     Hive.registerAdapter(CategoryAdapter());
-    Hive.registerAdapter(ProductsAdapter());
-   
+
     await Hive.openBox('cacheProduct');
-     Hive.registerAdapter(CartAdapter());
-     await Hive.openBox('cacheCart');
+    Hive.registerAdapter(ProductsAdapter());
+    Hive.registerAdapter(RatingAdapter());
+    Hive.registerAdapter(CartAdapter());
+    await Hive.openBox('cacheCart');
   }
 }

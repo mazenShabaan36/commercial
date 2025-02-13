@@ -5,25 +5,34 @@ import 'package:commercial/features/cart/domain/repositories/cart_repository.dar
 import 'package:commercial/features/products/data/models/products/products.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../../core/network/network_info.dart';
+
 class CartRepositoriesImpl implements CartRepository {
   final CartRemoteDataSources cartRemoteDataSources;
   final CartLocalDataSources cartLocalDataSource;
+  final NetworkInfo networkInfo;
 
   CartRepositoriesImpl(
-      {required this.cartRemoteDataSources, required this.cartLocalDataSource});
+      {required this.cartRemoteDataSources,
+      required this.cartLocalDataSource,
+      required this.networkInfo});
 
   @override
   Future<Either<Failure, List<Products>>> fetchCartsItems() async {
-    try {
-      final remoteData = await cartRemoteDataSources.fetchCartItems();
-      await cartLocalDataSource.cacheCart(remoteData);
-      return Right(remoteData);
-    } on ServerFailure catch (e) {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteData = await cartRemoteDataSources.fetchCartItems();
+        await cartLocalDataSource.cacheCart(remoteData);
+        return Right(remoteData);
+      }catch (e) {
+        return Left(ServerFailure(e.toString()));
+      }
+    } else {
       final cachedData = await cartLocalDataSource.getCachedCart();
       if (cachedData != null) {
         return Right(cachedData);
       }
-      return Left(e);
+      return Left(CacheFailure("No internet & no cached data available."));
     }
   }
 }

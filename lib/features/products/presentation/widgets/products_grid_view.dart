@@ -41,6 +41,8 @@ class ProductsGridView extends StatelessWidget {
               },
             ),
           );
+        } else if (state is ProductsFailure) {
+          return Text('${state.message}');
         } else {
           return Container();
         }
@@ -48,5 +50,3 @@ class ProductsGridView extends StatelessWidget {
     );
   }
 }
-
-

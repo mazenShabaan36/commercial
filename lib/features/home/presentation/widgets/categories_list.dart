@@ -1,4 +1,3 @@
-
 import 'package:commercial/features/home/presentation/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,11 +13,7 @@ class CategoriesList extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CategoryBloc, CategoryState>(
-      listener: (context, state) {
-        // selectedCategory =
-        //     state is CategorySelected ? state.selectedCategory : 'All';
-      },
+    return BlocBuilder<CategoryBloc, CategoryState>(
       builder: (context, state) {
         if (state is CategoryLoading) {
           return const CategoryListLoading();
@@ -73,4 +68,3 @@ class CategoriesList extends StatelessWidget {
     );
   }
 }
-

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../core/errors/failures.dart';
@@ -24,7 +26,8 @@ class ProductLocalDataSourceImpl implements ProductsLocalDataSource {
   @override
   Future<dynamic> getCachedProducts() async {
     try {
-      return box.get('cacheProduct');
+      log(box.get('cacheProduct'));
+      return  box.get('cacheProduct');
     } catch (e) {
       throw CacheFailure('Failed to get cached data');
     }
