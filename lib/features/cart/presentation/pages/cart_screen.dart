@@ -3,6 +3,7 @@ import 'package:commercial/core/utils/app_assets.dart';
 import 'package:commercial/core/utils/app_colors.dart';
 import 'package:commercial/core/utils/app_strings.dart';
 import 'package:commercial/core/utils/size.dart';
+import 'package:commercial/core/widgets/custom_button.dart';
 import 'package:commercial/features/cart/presentation/widgets/cart_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/text.dart';
 import '../bloc/bloc/cart_bloc.dart';
+import '../widgets/cart_error_content.dart';
 import '../widgets/checkout_section.dart';
 import '../widgets/loading_cart_list_view.dart';
 
@@ -63,6 +65,10 @@ class CartScreen extends StatelessWidget {
                   ),
                 ],
               );
+            } else if (state is CartError) {
+              return CartErrorContent(
+                state: state,
+              );
             } else {
               return Container();
             }
@@ -72,3 +78,4 @@ class CartScreen extends StatelessWidget {
     );
   }
 }
+

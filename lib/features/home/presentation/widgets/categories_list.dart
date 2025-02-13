@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/size.dart';
 import '../../../products/presentation/bloc/bloc/products_bloc.dart';
 import '../bloc/bloc/category_bloc.dart';
+import 'category_error_content.dart';
 import 'category_list_loading.dart';
 
 class CategoriesList extends StatelessWidget {
@@ -61,6 +62,8 @@ class CategoriesList extends StatelessWidget {
                   );
                 }),
           );
+        } else if (state is CategoryError) {
+          return CategoryErrorContent(state: state);
         } else {
           return Container();
         }

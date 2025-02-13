@@ -11,13 +11,11 @@ class LoadingCartListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomFadingWidget(
-      child: Expanded(
-        child: ListView.builder(
-          itemCount: 8,
-          itemBuilder: (context, index) {
-            return const CartItemCardLoading();
-          },
-        ),
+      child: ListView.builder(
+        itemCount: 8,
+        itemBuilder: (context, index) {
+          return const CartItemCardLoading();
+        },
       ),
     );
   }
