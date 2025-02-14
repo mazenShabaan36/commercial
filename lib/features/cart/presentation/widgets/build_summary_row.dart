@@ -20,7 +20,7 @@ class BuildSummaryRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(title, style: Styles.style14greyM),
-          Expanded(child: Text(value, style: Styles.style16mainClrL)),
+          Flexible(child: Text(value, style: Styles.style16mainClrL)),
         ],
       ),
     );

@@ -68,6 +68,7 @@ class SwipedUpScreen extends StatelessWidget {
               height: height(context) * 0.02,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Icon(
                   Icons.star,
