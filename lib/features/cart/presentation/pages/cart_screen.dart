@@ -24,66 +24,69 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(AppStrings.cart, style: Styles.style16mainClrL),
-        backgroundColor: AppColors.colorWhiteLight,
-        foregroundColor: AppColors.mainColor,
-        elevation: 0,
-        leadingWidth: width(context) * 0.1,
-        leading: GestureDetector(
-          onTap: () {
-            context.go(AppRoutes.home);
-          },
-          child: SvgPicture.asset(
-            AppAssets.arrowBackIcon,
-            color: AppColors.mainColor,
-            height: height(context) * 0.02,
-            width: width(context) * 0.02,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(AppStrings.cart, style: Styles.style16mainClrL),
+          backgroundColor: AppColors.colorWhiteLight,
+          foregroundColor: AppColors.mainColor,
+          elevation: 0,
+          leadingWidth: width(context) * 0.1,
+          leading: GestureDetector(
+            onTap: () {
+              context.go(AppRoutes.home);
+            },
+            child: SvgPicture.asset(
+              AppAssets.arrowBackIcon,
+              color: AppColors.mainColor,
+              height: height(context) * 0.02,
+              width: width(context) * 0.02,
+            ),
           ),
         ),
-      ),
-      body: BlocProvider(
-        create: (context) => GetIt.I<CartBloc>()..add(GetCart()),
-        child: StreamBuilder<List<ConnectivityResult>>(
-            stream: sl<Connectivity>().onConnectivityChanged,
-            builder: (context, snapshot) {
-              if (snapshot.hasData &&
-                  snapshot.data!.last != ConnectivityResult.none) {
-                context.read<CartBloc>().add(GetCart());
-              }
-              return BlocBuilder<CartBloc, CartState>(
-                builder: (context, state) {
-                  if (state is CartLoading) {
-                    return const LoadingCartListView();
-                  } else if (state is CartLoaded) {
-                    return Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: state.cartProducts.length,
-                            itemBuilder: (context, index) {
-                              final item = state.cartProducts[index];
-                              return CartItemCard(item: item, index: index);
-                            },
+        body: BlocProvider(
+          create: (context) => GetIt.I<CartBloc>()..add(GetCart()),
+          child: StreamBuilder<List<ConnectivityResult>>(
+              stream: sl<Connectivity>().onConnectivityChanged,
+              builder: (context, snapshot) {
+                if (snapshot.hasData &&
+                    snapshot.data!.last != ConnectivityResult.none) {
+                  context.read<CartBloc>().add(GetCart());
+                }
+                return BlocBuilder<CartBloc, CartState>(
+                  builder: (context, state) {
+                    if (state is CartLoading) {
+                      return const LoadingCartListView();
+                    } else if (state is CartLoaded) {
+                      return Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: state.cartProducts.length,
+                              itemBuilder: (context, index) {
+                                final item = state.cartProducts[index];
+                                return CartItemCard(item: item, index: index);
+                              },
+                            ),
                           ),
-                        ),
-                        CheckOutSection(
-                          state: state,
-                        ),
-                      ],
-                    );
-                  } else if (state is CartError) {
-                    return CartErrorContent(
-                      state: state,
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
-              );
-            }),
+                          CheckOutSection(
+                            state: state,
+                          ),
+                        ],
+                      );
+                    } else if (state is CartError) {
+                      return CartErrorContent(
+                        state: state,
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                );
+              }),
+        ),
       ),
     );
   }

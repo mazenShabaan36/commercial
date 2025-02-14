@@ -21,82 +21,85 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(40),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.82,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(40),
-                boxShadow: [
-                  BoxShadow(
-                      color: AppColors.colorBlack.withAlpha(120),
-                      blurRadius: 120,
-                      spreadRadius: 0.7),
-                ],
-                image: DecorationImage(
-                  image: NetworkImage(products.image.toString()),
-                  fit: BoxFit.cover,
+    return WillPopScope(
+       onWillPop: () async => false,
+      child: Scaffold(
+        body: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(40),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.82,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(40),
+                  boxShadow: [
+                    BoxShadow(
+                        color: AppColors.colorBlack.withAlpha(120),
+                        blurRadius: 120,
+                        spreadRadius: 0.7),
+                  ],
+                  image: DecorationImage(
+                    image: NetworkImage(products.image.toString()),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: GestureDetector(
+                  onVerticalDragUpdate: (details) {
+                    int sensitivity = 8;
+                    if (details.delta.dy < -sensitivity) {
+                      context.go(AppRoutes.swipedUp, extra: products);
+                    }
+                  },
+                  child: Column(
+                    children: [
+                      const TopIconsRow(),
+                      const Spacer(),
+                      Column(
+                        children: [
+                          SvgPicture.asset(AppAssets.swipIcon),
+                          Text(
+                            AppStrings.swipeUpForDetails,
+                            style: Styles.style14whiteM,
+                          ),
+                          const SizedBox(height: 10),
+                          const PageIndicatorsDots(),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                  ),
                 ),
               ),
-              child: GestureDetector(
-                onVerticalDragUpdate: (details) {
-                  int sensitivity = 8;
-                  if (details.delta.dy < -sensitivity) {
-                    context.go(AppRoutes.swipedUp, extra: products);
-                  }
-                },
-                child: Column(
+            ),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: width(context) * 0.04,
+                    vertical: height(context) * 0.01),
+                decoration: const BoxDecoration(
+                  color: AppColors.whiteBackground,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const TopIconsRow(),
-                    const Spacer(),
-                    Column(
-                      children: [
-                        SvgPicture.asset(AppAssets.swipIcon),
-                        Text(
-                          AppStrings.swipeUpForDetails,
-                          style: Styles.style14whiteM,
-                        ),
-                        const SizedBox(height: 10),
-                        const PageIndicatorsDots(),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
+                    SubtotalColumn(products: products),
+                    SizedBox(
+                      width: width(context) * 0.42,
+                      child: CustomButton(
+                          text: AppStrings.continueText,
+                          onPressed: () {},
+                          backgroundColor: AppColors.mainColor,
+                          borderRadius: 30,
+                          padding: 15),
+                    )
                   ],
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: width(context) * 0.04,
-                  vertical: height(context) * 0.01),
-              decoration: const BoxDecoration(
-                color: AppColors.whiteBackground,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SubtotalColumn(products: products),
-                  SizedBox(
-                    width: width(context) * 0.42,
-                    child: CustomButton(
-                        text: AppStrings.continueText,
-                        onPressed: () {},
-                        backgroundColor: AppColors.mainColor,
-                        borderRadius: 30,
-                        padding: 15),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
