@@ -5,12 +5,14 @@ import 'package:commercial/core/utils/app_strings.dart';
 import 'package:commercial/core/utils/size.dart';
 import 'package:commercial/core/widgets/custom_button.dart';
 import 'package:commercial/features/cart/presentation/widgets/cart_item_card.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/di/di.dart';
 import '../../../../core/utils/text.dart';
 import '../bloc/bloc/cart_bloc.dart';
 import '../widgets/cart_error_content.dart';
@@ -44,38 +46,45 @@ class CartScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => GetIt.I<CartBloc>()..add(GetCart()),
-        child: BlocBuilder<CartBloc, CartState>(
-          builder: (context, state) {
-            if (state is CartLoading) {
-              return const LoadingCartListView();
-            } else if (state is CartLoaded) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: state.cartProducts.length,
-                      itemBuilder: (context, index) {
-                        final item = state.cartProducts[index];
-                        return CartItemCard(item: item, index: index);
-                      },
-                    ),
-                  ),
-                  CheckOutSection(
-                    state: state,
-                  ),
-                ],
+        child: StreamBuilder<List<ConnectivityResult>>(
+            stream: sl<Connectivity>().onConnectivityChanged,
+            builder: (context, snapshot) {
+              if (snapshot.hasData &&
+                  snapshot.data!.last != ConnectivityResult.none) {
+                context.read<CartBloc>().add(GetCart());
+              }
+              return BlocBuilder<CartBloc, CartState>(
+                builder: (context, state) {
+                  if (state is CartLoading) {
+                    return const LoadingCartListView();
+                  } else if (state is CartLoaded) {
+                    return Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: state.cartProducts.length,
+                            itemBuilder: (context, index) {
+                              final item = state.cartProducts[index];
+                              return CartItemCard(item: item, index: index);
+                            },
+                          ),
+                        ),
+                        CheckOutSection(
+                          state: state,
+                        ),
+                      ],
+                    );
+                  } else if (state is CartError) {
+                    return CartErrorContent(
+                      state: state,
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
               );
-            } else if (state is CartError) {
-              return CartErrorContent(
-                state: state,
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
+            }),
       ),
     );
   }
 }
-

@@ -1,3 +1,4 @@
+import 'package:commercial/core/routers/routers.dart';
 import 'package:commercial/core/utils/app_assets.dart';
 import 'package:commercial/core/utils/app_colors.dart';
 import 'package:commercial/core/utils/app_strings.dart';
@@ -6,7 +7,9 @@ import 'package:commercial/core/widgets/custom_button.dart';
 import 'package:commercial/features/products/presentation/widgets/page_indicators_dots.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/routers/app_routes.dart';
 import '../../../../core/utils/text.dart';
 import '../../data/models/products/products.dart';
 import '../widgets/subtotal_column.dart';
@@ -40,23 +43,31 @@ class ProductDetailScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Column(
-                children: [
-                  const TopIconsRow(),
-                  const Spacer(),
-                  Column(
-                    children: [
-                      SvgPicture.asset(AppAssets.swipIcon),
-                      Text(
-                        AppStrings.swipeUpForDetails,
-                        style: Styles.style14whiteM,
-                      ),
-                      const SizedBox(height: 10),
-                      const PageIndicatorsDots(),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                ],
+              child: GestureDetector(
+                onVerticalDragUpdate: (details) {
+                  int sensitivity = 8;
+                  if (details.delta.dy < -sensitivity) {
+                    context.go(AppRoutes.swipedUp, extra: products);
+                  }
+                },
+                child: Column(
+                  children: [
+                    const TopIconsRow(),
+                    const Spacer(),
+                    Column(
+                      children: [
+                        SvgPicture.asset(AppAssets.swipIcon),
+                        Text(
+                          AppStrings.swipeUpForDetails,
+                          style: Styles.style14whiteM,
+                        ),
+                        const SizedBox(height: 10),
+                        const PageIndicatorsDots(),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
               ),
             ),
           ),

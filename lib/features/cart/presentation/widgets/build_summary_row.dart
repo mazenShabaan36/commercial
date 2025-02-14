@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 
 import '../../../../core/utils/text.dart';
@@ -21,7 +20,7 @@ class BuildSummaryRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(title, style: Styles.style14greyM),
-          Text(value, style: Styles.style16mainClrL),
+          Expanded(child: Text(value, style: Styles.style16mainClrL)),
         ],
       ),
     );

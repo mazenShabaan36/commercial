@@ -13,4 +13,9 @@ class AppStrings {
   static const String total = 'Total';
   static const String shipping = 'Shipping';
   static const String checkOut = 'Check Out';
+  static const String title='Title';
+  static const String describtion='Describtion';
+  static const String price='Price';
+  static const String rating='Rating';
+  static const String addToCart='Add To Cart';
 }
